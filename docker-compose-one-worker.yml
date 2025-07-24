@@ -1,0 +1,32 @@
+version: '3.0'
+
+services:
+  All_crawler:
+    image: ${DOCKER_IMAGE_FULL}
+    hostname: "{{.Service.Name}}.{{.Task.Slot}}"
+    restart: always
+    # 將容器內的 docker 與容器外的 docker 做連結
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      
+    depends_on:
+      - scheduler
+    command: pipenv run airflow celery worker -q All_crawler --concurrency=6
+    environment:
+      - ENV=DOCKER 
+    # swarm 設定
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.labels.All_crawler == true]
+    networks:
+        - my_swarm_network
+
+networks:
+  my_swarm_network:
+    external: true
+
+volumes:
+  redis_data:
+  

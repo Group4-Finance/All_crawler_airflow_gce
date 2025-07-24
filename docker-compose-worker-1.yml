@@ -1,0 +1,104 @@
+version: '3.0'
+
+services:
+  # 初始化 Airflow 資料
+
+  crawler_cnyes_headlines:
+    image: ${DOCKER_IMAGE_FULL}
+    hostname: "{{.Service.Name}}.{{.Task.Slot}}"
+    restart: always
+    # 將容器內的 docker 與容器外的 docker 做連結
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      
+    depends_on:
+      - scheduler
+    command: pipenv run airflow celery worker -q crawler_cnyes_headlines
+    environment:
+      - ENV=DOCKER 
+    # swarm 設定
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.labels.crawler_cnyes_headlines == true]
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1024M
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    networks:
+        - my_swarm_network
+
+  ETF_historyprice:
+    image: ${DOCKER_IMAGE_FULL}
+    hostname: "{{.Service.Name}}.{{.Task.Slot}}"
+    restart: always
+    # 將容器內的 docker 與容器外的 docker 做連結
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      
+    depends_on:
+      - scheduler
+    command: pipenv run airflow celery worker -q ETF_historyprice
+    environment:
+      - ENV=DOCKER 
+    # swarm 設定
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.labels.ETF_historyprice == true]
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1024M
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+        
+    networks:
+        - my_swarm_network
+
+  ETF_PremiumDiscount:
+    image: ${DOCKER_IMAGE_FULL}
+    hostname: "{{.Service.Name}}.{{.Task.Slot}}"
+    restart: always
+    # 將容器內的 docker 與容器外的 docker 做連結
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      
+    depends_on:
+      - scheduler
+    command: pipenv run airflow celery worker -q ETF_PremiumDiscount
+    environment:
+      - ENV=DOCKER 
+    # swarm 設定
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.labels.ETF_PremiumDiscount == true]
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1024M
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    networks:
+        - my_swarm_network
+
+
+
+
+# 使用外部已建立好的 Docker Swarm 網路
+networks:
+  my_swarm_network:
+    external: true
+
+volumes:
+  redis_data:
+  
