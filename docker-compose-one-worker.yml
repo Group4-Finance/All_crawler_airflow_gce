@@ -11,14 +11,14 @@ services:
       # - ./keys/airflow-467007-2ba7d0655b30.json:/opt/airflow/keys/gcp_service_account.json:ro
     depends_on:
       - scheduler
-    command: pipenv run airflow celery worker -q All_crawler --concurrency=6
+    command: pipenv run airflow celery worker -q All_crawler 
     environment:
       - ENV=DOCKER 
       # - GOOGLE_APPLICATION_CREDENTIALS=/opt/airflow/keys/gcp_service_account.json
     # swarm 設定
     deploy:
       mode: replicated
-      replicas: 1
+      replicas: 3
       placement:
         constraints: [node.labels.All_crawler == true]
     networks:

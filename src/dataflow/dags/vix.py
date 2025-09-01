@@ -15,6 +15,10 @@ from dataflow.etl.docker_operator import (
     vix,
 )
 
+
+
+url = "https://www.stockq.org/index/VIX.php"
+
 # 定義 DAG，並用 with 語法將任務放入 DAG 環境中
 with airflow.DAG(
     # DAG 的唯一名稱，用來識別 DAG
@@ -22,7 +26,7 @@ with airflow.DAG(
     # 套用預設參數設定
     default_args=DEFAULT_ARGS,
     # 不自動排程，只能手動或外部觸發
-    schedule_interval="30 23 * * 1-5",
+    schedule_interval="0 8 * * 1-5",
     # schedule_interval= None,
     concurrency=1,
     # 限制同時執行的最大 DAG 實例數
@@ -31,4 +35,4 @@ with airflow.DAG(
     catchup=False,
 ) as dag:
     # 建立並註冊 DockerOperator 任務到 DAG
-    task = vix("^vix")
+    task = vix(url)

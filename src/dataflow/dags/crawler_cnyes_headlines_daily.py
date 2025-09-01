@@ -23,7 +23,7 @@ with airflow.DAG(
     dag_id="crawler_cnyes_headlines_daily",
     # 套用預設參數設定
     default_args=DEFAULT_ARGS,
-    schedule_interval="30 23 * * 1-5",
+    schedule_interval="30 23 * * *",
     # schedule_interval= None,
     concurrency=1,
     # 限制同時執行的最大 DAG 實例數

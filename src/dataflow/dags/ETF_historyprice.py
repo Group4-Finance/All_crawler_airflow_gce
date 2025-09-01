@@ -1,5 +1,6 @@
 # 匯入 Airflow 核心模組
 import airflow
+from datetime import timedelta
 
 # 匯入自定義的常數設定，用於統一管理 DAG 參數與執行限制
 from dataflow.constant import (
@@ -28,11 +29,12 @@ with airflow.DAG(
     # 套用預設參數設定
     default_args=DEFAULT_ARGS,
     # 不自動排程，只能手動或外部觸發
-    schedule_interval="30 23 * * 1-5",
+    schedule_interval="0 19 * * 1-5",
     # schedule_interval= None,
-    concurrency=1,
+    concurrency=5,
     # 限制同時執行的最大 DAG 實例數
     max_active_runs=MAX_ACTIVE_RUNS,
+    # max_active_runs=1,
     # 禁止補跑過去未執行的排程
     catchup=False,
     
