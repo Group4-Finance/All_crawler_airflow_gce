@@ -23,9 +23,11 @@ docker swarm leave --force
 docker swarm init
 ### 加入node
 (在其他雲端機器裡輸入以下指令使其加入node裡成為manager的worker)
+
 docker swarm join --token <你的token>
 ### 建立docker內網 
 (如果不對外開port 就必須要內網連結各台機器，且機器所在的區域必須是同一個)
+
 docker network create --scope=swarm --driver=overlay --attachable my_swarm_network
 ### 建立volume
 docker volume create mysql
