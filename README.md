@@ -38,6 +38,7 @@ docker volume rm mysql
 df -h
 ### 刪除沒被使用的 images 
 (如果一直更新image並重新啟動service會使磁碟空間不斷累積，所以有此情況務必要清理以免磁碟空間不夠)
+
 docker image prune
 ### 刪除所有停止中的容器
 docker container prune
