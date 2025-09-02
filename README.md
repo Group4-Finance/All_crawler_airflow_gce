@@ -65,8 +65,9 @@ sudo apt install cron
    0 15 * * * /usr/bin/docker service update --force airflow_scheduler  # 台灣 23:00
    
    (時間設定原為UTC時間，因此用UTC+8的方法做時間轉換)
+
    (加入"/usr/bin/docker" 方便雲端機器找到 docker 以防指令失敗)
 
-4. 設定完按Crl + O
-5. 按 Enter
-6. 按 Crl + X 離開編輯
+5. 設定完按Crl + O
+6. 按 Enter
+7. 按 Crl + X 離開編輯
