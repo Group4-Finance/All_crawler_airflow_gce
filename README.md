@@ -58,7 +58,7 @@ sudo apt install cron
 
    (這裡需要用sudo 以root權限去編輯，否則編輯後指令無效)
    
-3. 在最下方加入指令(設定為每天早上七點、晚間11點重啟)
+3. 在最下方加入以下指令(設定為每天早上七點、晚間11點重啟)
    
    0 23 * * * /usr/bin/docker service update --force airflow_scheduler  # 台灣 07:00
 
