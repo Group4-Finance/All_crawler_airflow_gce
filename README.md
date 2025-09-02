@@ -60,7 +60,6 @@ sudo apt install cron
    
 3. 在最下方加入指令(設定為每天早上七點、晚間11點重啟)
    
-
    0 23 * * * /usr/bin/docker service update --force airflow_scheduler  # 台灣 07:00
 
    0 15 * * * /usr/bin/docker service update --force airflow_scheduler  # 台灣 23:00
