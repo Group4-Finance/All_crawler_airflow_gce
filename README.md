@@ -60,13 +60,7 @@ sudo apt install cron
    
 3. 在最下方加入指令(設定為每天早上七點、晚間11點重啟)
    
-   Edit this file to introduce tasks to be run by cron.
-                       '
-                       '
-                       '
-   m h  dom mon dow   command
 
-   (在這裡加入以下兩行指令)
    0 23 * * * /usr/bin/docker service update --force airflow_scheduler  # 台灣 07:00
 
    0 15 * * * /usr/bin/docker service update --force airflow_scheduler  # 台灣 23:00
