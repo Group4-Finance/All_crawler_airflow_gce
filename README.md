@@ -45,6 +45,7 @@ docker container prune
 
 ## 控制scheduler 定時重啟
 (以下步驟都要在 manager 的雲端機器上執行)
+
 (由於scheduler不定時會卡住，導致任務無法傳送到Rabbitmq(或Redis)進行排程，所以必須定時重啟以維持排程)
 ### 安裝 cron 套件
 sudo apt update
