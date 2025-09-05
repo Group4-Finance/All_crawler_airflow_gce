@@ -71,3 +71,5 @@ sudo apt install cron
 5. 設定完按Crl + O
 6. 按 Enter
 7. 按 Crl + X 離開編輯
+### 列出所有的任務
+sudo crontab -l
