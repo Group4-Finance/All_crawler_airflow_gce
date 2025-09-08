@@ -5,7 +5,7 @@ DEFAULT_ARGS = {
     # DAG/Task 的負責人，顯示在 Airflow UI 中
     "owner": "airflowGP4",
     # 若任務失敗，最多重試 1 次
-    "retries": 3,
+    "retries": 2,
     # 每次重試間隔 1 分鐘
     "retry_delay": datetime.timedelta(minutes=2),
     # DAG 開始生效的時間
